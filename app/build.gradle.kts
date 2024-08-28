@@ -66,4 +66,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // compose navigation
+    val navVersion ="2.7.7" // Use the latest version available
+    implementation("androidx.navigation:navigation-compose:$navVersion")
+
+    // extended icons
+    val composeVersion = "1.6.8"
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
 }
