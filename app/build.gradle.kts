@@ -74,4 +74,8 @@ dependencies {
     // extended icons
     val composeVersion = "1.6.8"
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+
+    // calendar view
+    val calendarVersion = "2.5.4"
+    implementation("com.kizitonwose.calendar:compose:$calendarVersion")
 }
