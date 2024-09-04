@@ -26,10 +26,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.taskscheduler.ui.components.BottomNavigationBar
 import com.example.taskscheduler.ui.components.TopAppNavBar
+import com.example.taskscheduler.ui.screens.AboutScreen
 import com.example.taskscheduler.ui.screens.FolderScreen
 import com.example.taskscheduler.ui.screens.HomeScreen
 import com.example.taskscheduler.ui.screens.NavRoutesHost
 import com.example.taskscheduler.ui.screens.TaskScreen
+import com.example.taskscheduler.ui.screens.TaskSearchScreen
 import com.example.taskscheduler.ui.theme.TaskSchedulerTheme
 import com.example.taskscheduler.utils.Routes
 
@@ -37,6 +39,7 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
 
         setContent {
@@ -49,7 +52,7 @@ class MainActivity : ComponentActivity() {
             TaskSchedulerTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = Routes.Home.route
+                    startDestination = Routes.Search.route
                 ) {
                     composable(route = Routes.Home.route) {
                         HomeScreen(
@@ -65,6 +68,19 @@ class MainActivity : ComponentActivity() {
                         FolderScreen(
                             modifier = Modifier
                                 .fillMaxSize()
+                        )
+                    }
+
+                    composable(route = Routes.About.route) {
+                        AboutScreen(
+                            modifier = Modifier
+                                .fillMaxSize()
+                        )
+                    }
+
+                    composable(route = Routes.Search.route) {
+                        TaskSearchScreen(
+                            modifier = Modifier.fillMaxSize()
                         )
                     }
                 }
