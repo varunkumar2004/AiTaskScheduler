@@ -1,17 +1,25 @@
 package com.example.taskscheduler.ui.components
 
+import android.media.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,127 +28,92 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import com.example.taskscheduler.utils.Routes
 
 @Composable
 fun BottomNavigationBar(
     modifier: Modifier = Modifier,
+    selectedItem: Routes,
     onNavItemClick: (Routes) -> Unit
 ) {
-    var selectedItem by remember {
-        mutableStateOf<Routes>(Routes.Home)
-    }
-
-//    NavigationBar(
-//        modifier = modifier
-//    ) {
-//        NavigationBarItem(
-//            selected = selectedItem == Routes.Home,
-//            onClick = { selectedItem = Routes.Home },
-//            label = {
-//                Text(text = Routes.Home.route)
-//            },
-//            icon = {
-//                Icon(
-//                    imageVector = Routes.Home.icon!!,
-//                    contentDescription = Routes.Home.route
-//                )
-//            }
-//        )
-
-//        NavigationBarItem(
-//            selected = selectedItem == Routes.Calendar,
-//            onClick = { selectedItem = Routes.Calendar },
-//            label = {
-//                Text(text = Routes.Calendar.route)
-//            },
-//            icon = {
-//                Icon(
-//                    imageVector = Routes.Calendar.icon!!,
-//                    contentDescription = Routes.Calendar.route
-//                )
-//            }
-//        )
-
-        BottomAppBar {
+    BottomAppBar(
+        containerColor = Color.Transparent,
+        contentPadding = PaddingValues(horizontal = 16.dp)
+    ) {
+        Row(
+            modifier = modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Row(
-                modifier = modifier,
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(
-                        onClick = { onNavItemClick(Routes.Home) }
-                    ) {
-                        Icon(
-                            imageVector = Routes.Home.icon!!,
-                            contentDescription = Routes.Home.route
-                        )
-                    }
+                val buttonModifier = Modifier
+                    .height(TextFieldDefaults.MinHeight)
 
-                    IconButton(
-                        onClick = { onNavItemClick(Routes.Bookmarks) }
-                    ) {
-                        Icon(
-                            imageVector = Routes.Bookmarks.icon!!,
-                            contentDescription = Routes.Bookmarks.route
-                        )
-                    }
+                NavItemChip(
+                    modifier = buttonModifier,
+                    isSelected = selectedItem == Routes.Home,
+                    onNavItemChipClick = { onNavItemClick(Routes.Home) },
+                    icon = Routes.Home.icon!!,
+                    label = Routes.Home.route
+                )
 
-                    IconButton(
-                        onClick = { onNavItemClick(Routes.Folders) }
-                    ) {
-                        Icon(
-                            imageVector = Routes.Folders.icon!!,
-                            contentDescription = Routes.Folders.route
-                        )
-                    }
+                NavItemChip(
+                    modifier = buttonModifier,
+                    isSelected = selectedItem == Routes.Bookmarks,
+                    onNavItemChipClick = { onNavItemClick(Routes.Bookmarks) },
+                    label = Routes.Bookmarks.route
+                )
+
+                NavItemChip(
+                    modifier = buttonModifier,
+                    isSelected = selectedItem == Routes.Folders,
+                    onNavItemChipClick = { onNavItemClick(Routes.Folders) },
+                    label = Routes.Folders.route
+                )
+            }
+
+            IconButton(
+                colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = Color.LightGray,
+                    contentColor = Color.Black
+                ),
+                onClick = {
+
                 }
-
-                IconButton(
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = Color.LightGray,
-                        contentColor = Color.Black
-                    ),
-                    onClick = { onNavItemClick(Routes.Home) }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add task"
-                    )
-                }
-
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add task"
+                )
             }
         }
+    }
+}
 
-//        NavigationBarItem(
-//            selected = selectedItem == Routes.Bookmarks,
-//            onClick = { selectedItem = Routes.Bookmarks },
-//            label = {
-//                Text(text = Routes.Bookmarks.route)
-//            },
-//            icon = {
-//                Icon(
-//                    imageVector = Routes.Bookmarks.icon!!,
-//                    contentDescription = Routes.Bookmarks.route
-//                )
-//            }
-//        )
-//
-//        NavigationBarItem(
-//            selected = selectedItem == Routes.Folders,
-//            onClick = { selectedItem = Routes.Folders },
-//            label = {
-//                Text(text = Routes.Folders.route)
-//            },
-//            icon = {
-//                Icon(
-//                    imageVector = Routes.Folders.icon!!,
-//                    contentDescription = Routes.Folders.route
-//                )
-//            }
-//        )
-//    }
+@Composable
+private fun NavItemChip(
+    modifier: Modifier = Modifier,
+    isSelected: Boolean,
+    onNavItemChipClick: () -> Unit,
+    icon: ImageVector? = null,
+    label: String
+) {
+    TextButton(
+        modifier = modifier,
+        onClick = onNavItemChipClick,
+        colors = ButtonDefaults.textButtonColors(
+            containerColor = if (isSelected) Color.LightGray else Color.Transparent,
+        )
+    ) {
+        Text(
+            text = label,
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+        )
+    }
 }

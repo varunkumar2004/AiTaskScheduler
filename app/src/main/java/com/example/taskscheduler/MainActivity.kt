@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,7 +26,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.taskscheduler.ui.components.BottomNavigationBar
 import com.example.taskscheduler.ui.components.TopAppNavBar
+import com.example.taskscheduler.ui.screens.FolderScreen
 import com.example.taskscheduler.ui.screens.HomeScreen
+import com.example.taskscheduler.ui.screens.NavRoutesHost
+import com.example.taskscheduler.ui.screens.TaskScreen
 import com.example.taskscheduler.ui.theme.TaskSchedulerTheme
 import com.example.taskscheduler.utils.Routes
 
@@ -36,39 +40,32 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val navController = rememberNavController()
             var selectedRoute by remember {
                 mutableStateOf<Routes>(Routes.Home)
             }
 
+            val navController = rememberNavController()
+
             TaskSchedulerTheme {
-                Scaffold(
-                    topBar = {
-                        TopAppNavBar(
-                            modifier = Modifier.fillMaxWidth(),
-                            route = selectedRoute.route
-                        )
-                    },
-                    bottomBar = {
-                        BottomNavigationBar(
-                            modifier = Modifier.fillMaxWidth(),
-                            onNavItemClick = {route ->
-                                selectedRoute = route
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.Home.route
+                ) {
+                    composable(route = Routes.Home.route) {
+                        HomeScreen(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            onNavItemClick = { route ->
+                                navController.navigate(route.route)
                             }
                         )
                     }
-                ) { innerPadding ->
-                    NavHost(
-                        navController = navController,
-                        startDestination = Routes.Home.route
-                    ) {
-                        composable(route = Routes.Home.route) {
-                            HomeScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(innerPadding)
-                            )
-                        }
+
+                    composable(route = Routes.Folders.route) {
+                        FolderScreen(
+                            modifier = Modifier
+                                .fillMaxSize()
+                        )
                     }
                 }
             }
