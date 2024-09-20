@@ -1,6 +1,5 @@
 package com.example.taskscheduler.ui.components
 
-import android.media.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -10,26 +9,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.taskscheduler.utils.Routes
 
@@ -39,82 +36,73 @@ fun BottomNavigationBar(
     selectedItem: Routes,
     onNavItemClick: (Routes) -> Unit
 ) {
-    BottomAppBar(
-        containerColor = Color.Transparent,
-        contentPadding = PaddingValues(horizontal = 16.dp)
+    NavigationBar(
+        modifier = modifier,
     ) {
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(5.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                val buttonModifier = Modifier
-                    .height(TextFieldDefaults.MinHeight)
-
-                NavItemChip(
-                    modifier = buttonModifier,
-                    isSelected = selectedItem == Routes.Home,
-                    onNavItemChipClick = { onNavItemClick(Routes.Home) },
-                    icon = Routes.Home.icon!!,
-                    label = Routes.Home.route
-                )
-
-                NavItemChip(
-                    modifier = buttonModifier,
-                    isSelected = selectedItem == Routes.Bookmarks,
-                    onNavItemChipClick = { onNavItemClick(Routes.Bookmarks) },
-                    label = Routes.Bookmarks.route
-                )
-
-                NavItemChip(
-                    modifier = buttonModifier,
-                    isSelected = selectedItem == Routes.Folders,
-                    onNavItemChipClick = { onNavItemClick(Routes.Folders) },
-                    label = Routes.Folders.route
-                )
-            }
-
-            IconButton(
-                colors = IconButtonDefaults.filledIconButtonColors(
-                    containerColor = Color.LightGray,
-                    contentColor = Color.Black
-                ),
-                onClick = {
-
-                }
-            ) {
+        NavigationBarItem(
+            selected = selectedItem == Routes.Home,
+            onClick = { onNavItemClick(Routes.Home) },
+            label = {
+                Text(text = Routes.Home.route)
+            },
+            icon = {
                 Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Add task"
+                    imageVector = Routes.Home.icon!!,
+                    contentDescription = null
                 )
             }
-        }
+        )
+
+        NavigationBarItem(
+            selected = selectedItem == Routes.Search,
+            onClick = { onNavItemClick(Routes.Search) },
+            label = {
+                Text(text = Routes.Search.route)
+            },
+            icon = {
+                Icon(
+                    imageVector = Routes.Search.icon!!,
+                    contentDescription = null
+                )
+            }
+        )
+
+        NavigationBarItem(
+            selected = selectedItem == Routes.Bookmarks,
+            onClick = { onNavItemClick(Routes.Bookmarks) },
+            label = {
+                Text(text = Routes.Bookmarks.route)
+            },
+            icon = {
+                Icon(
+                    imageVector = Routes.Bookmarks.icon!!,
+                    contentDescription = null
+                )
+            }
+        )
+
+        NavigationBarItem(
+            selected = selectedItem == Routes.Folders,
+            onClick = { onNavItemClick(Routes.Folders) },
+            label = {
+                Text(text = Routes.Folders.route)
+            },
+            icon = {
+                Icon(
+                    imageVector = Routes.Folders.icon!!,
+                    contentDescription = null
+                )
+            }
+        )
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-private fun NavItemChip(
-    modifier: Modifier = Modifier,
-    isSelected: Boolean,
-    onNavItemChipClick: () -> Unit,
-    icon: ImageVector? = null,
-    label: String
-) {
-    TextButton(
-        modifier = modifier,
-        onClick = onNavItemChipClick,
-        colors = ButtonDefaults.textButtonColors(
-            containerColor = if (isSelected) Color.LightGray else Color.Transparent,
-        )
-    ) {
-        Text(
-            text = label,
-            modifier = Modifier
-                .padding(horizontal = 10.dp)
-        )
-    }
+private fun NavBarPrev() {
+    BottomNavigationBar(
+        modifier = Modifier.fillMaxWidth(),
+        selectedItem = Routes.Home,
+        onNavItemClick = {}
+    )
 }

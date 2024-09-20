@@ -2,6 +2,11 @@ package com.example.taskscheduler.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,6 +25,14 @@ fun TaskScreenView(
             TopAppNavBar(
                 route = selectedNavItem.route
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                shape = CircleShape,
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = null)
+            }
         },
         bottomBar = {
             BottomNavigationBar(

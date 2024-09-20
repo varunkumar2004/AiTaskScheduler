@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ElevatedCard
@@ -23,13 +25,11 @@ import com.example.taskscheduler.data.Task
 fun TaskView(
     modifier: Modifier = Modifier,
     task: Task,
+    colors: CardColors,
     onTaskViewClick: () -> Unit
 ) {
     Card(
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent,
-            contentColor = Color.Black
-        ),
+        colors = colors,
         shape = RoundedCornerShape(30.dp),
         onClick = onTaskViewClick
     ) {
