@@ -32,10 +32,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            var selectedRoute by remember {
-                mutableStateOf<Routes>(Routes.Home)
-            }
-
             val navController = rememberNavController()
 
             TaskSchedulerTheme {
@@ -69,7 +65,10 @@ class MainActivity : ComponentActivity() {
 
                     composable(route = Routes.Search.route) {
                         TaskSearchScreen(
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier.fillMaxSize(),
+                            onNavItemClick = { route ->
+                                navController.navigate(route.route)
+                            }
                         )
                     }
                 }

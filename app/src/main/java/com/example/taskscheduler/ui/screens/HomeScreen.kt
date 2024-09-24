@@ -1,5 +1,6 @@
 package com.example.taskscheduler.ui.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,21 +40,66 @@ fun HomeScreen(
             Task(
                 title = "Task 2",
                 description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
-            )
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
+            Task(
+                title = "Task 2",
+                description = "Description 2 alsh flaksdh fklasjdhf lkasdh fkljasd flkjahsdlkfjalsdkjf"
+            ),
         )
     }
 
     TaskScreenView(
         modifier = modifier,
-        view = {innerPadding ->
+        view = { innerPadding ->
             Column(
                 modifier = modifier
                     .padding(innerPadding)
                     .padding(horizontal = 16.dp)
             ) {
-                LazyColumn {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
                     items(tasks) { task ->
-
+                        TaskListItem(
+                            modifier = Modifier.fillMaxWidth(),
+                            task = task
+                        )
                     }
                 }
             }
