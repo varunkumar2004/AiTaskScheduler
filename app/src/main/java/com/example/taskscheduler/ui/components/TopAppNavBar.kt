@@ -1,6 +1,7 @@
 package com.example.taskscheduler.ui.components
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
@@ -22,6 +23,7 @@ fun TopAppNavBar(
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(top = 5.dp, bottom = 0.dp),
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color.Transparent
         ),

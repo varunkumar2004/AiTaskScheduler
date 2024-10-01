@@ -42,7 +42,7 @@ import com.example.taskscheduler.utils.Routes
 @Composable
 fun BottomNavigationBar(
     modifier: Modifier = Modifier,
-    selectedItem: Routes,
+    onAddNewTask: () -> Unit,
     onNavItemClick: (Routes) -> Unit
 ) {
     NavigationBar(
@@ -60,7 +60,7 @@ fun BottomNavigationBar(
                 containerColor = Color.Transparent,
                 contentColor = secondaryColor
             )
-            
+
             Button(
                 colors = navButtonColors,
                 onClick = { onNavItemClick(Routes.Home) }
@@ -68,6 +68,16 @@ fun BottomNavigationBar(
                 Icon(
                     imageVector = Routes.Home.icon!!,
                     contentDescription = Routes.Home.route
+                )
+            }
+
+            Button(
+                colors = navButtonColors,
+                onClick = onAddNewTask
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null
                 )
             }
 
@@ -81,25 +91,15 @@ fun BottomNavigationBar(
                 )
             }
 
-            Button(
-                colors = navButtonColors,
-                onClick = { onNavItemClick(Routes.Folders) }
-            ) {
-                Icon(
-                    imageVector = Routes.Folders.icon!!,
-                    contentDescription = Routes.Folders.route
-                )
-            }
-
-            Button(
-                colors = navButtonColors,
-                onClick = { onNavItemClick(Routes.Folders) }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null
-                )
-            }
+//            Button(
+//                colors = navButtonColors,
+//                onClick = { onNavItemClick(Routes.Folders) }
+//            ) {
+//                Icon(
+//                    imageVector = Routes.Folders.icon!!,
+//                    contentDescription = Routes.Folders.route
+//                )
+//            }
         }
     }
 }
@@ -109,7 +109,7 @@ fun BottomNavigationBar(
 private fun NavBarPrev() {
     BottomNavigationBar(
         modifier = Modifier.fillMaxWidth(),
-        selectedItem = Routes.Home,
+        onAddNewTask = {},
         onNavItemClick = {}
     )
 }
