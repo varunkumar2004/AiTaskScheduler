@@ -35,8 +35,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.taskscheduler.ui.theme.primaryColor
-import com.example.taskscheduler.ui.theme.secondaryColor
 import com.example.taskscheduler.utils.Routes
 
 @Composable
@@ -49,7 +47,7 @@ fun BottomNavigationBar(
         modifier = modifier
             .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)),
         windowInsets = WindowInsets(bottom = 10.dp),
-        containerColor = primaryColor,
+//        containerColor = primaryColor,
     ) {
         Row(
             modifier = modifier,
@@ -58,7 +56,7 @@ fun BottomNavigationBar(
         ) {
             val navButtonColors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent,
-                contentColor = secondaryColor
+//                contentColor = secondaryColor
             )
 
             Button(

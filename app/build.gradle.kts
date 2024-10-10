@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -72,8 +73,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // compose navigation
-    val navVersion ="2.7.7" // Use the latest version available
+    val navVersion ="2.8.2" // Use the latest version available
     implementation("androidx.navigation:navigation-compose:$navVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     // extended icons
     val composeVersion = "1.6.8"

@@ -1,69 +1,114 @@
 package com.example.taskscheduler.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import com.example.taskscheduler.data.Task
+import com.example.taskscheduler.ui.screens.TaskScreenView
+import com.example.taskscheduler.ui.theme.darkPrimaryColor
+import com.example.taskscheduler.ui.theme.darkSecondaryColor
+import com.example.taskscheduler.utils.Routes
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskView(
     modifier: Modifier = Modifier,
-    task: Task,
-    colors: CardColors,
-    onTaskViewClick: () -> Unit
+    view: @Composable (PaddingValues) -> Unit,
+    onActionButtonClick: () -> Unit = {},
+    onNavItemClick: (Routes) -> Unit
 ) {
-    Card(
-        colors = colors,
-        shape = RoundedCornerShape(30.dp),
-        onClick = onTaskViewClick
-    ) {
-        Row(
-            modifier = modifier
-                .padding(10.dp),
-            verticalAlignment = Alignment.CenterVertically
+    var showBottomSheet by remember {
+        mutableStateOf(false)
+    }
+
+    if (showBottomSheet) {
+        ModalBottomSheet(
+            containerColor = Color.White,
+            onDismissRequest = { showBottomSheet = false }
         ) {
-            Checkbox(
-                checked = task.isCompleted,
-                onCheckedChange = {
-
-                }
+            TaskScreenView(
+                modifier = Modifier.fillMaxWidth()
             )
+        }
+    }
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+    Scaffold(
+        modifier = modifier,
+        containerColor = darkPrimaryColor,
+        topBar = {
+            TopAppNavBar(
+                route = "route"
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                shape = CircleShape,
+                onClick = onActionButtonClick
             ) {
-                Text(
-                    text = task.title,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodyLarge
-                )
+                Icon(imageVector = Icons.Default.Add, contentDescription = null)
+            }
+        },
+//        bottomBar = {
+//            BottomNavigationBar(
+//                modifier = Modifier.fillMaxWidth(),
+//                onAddNewTask = {
+//                    showBottomSheet = true
+//                },
+//                onNavItemClick = onNavItemClick
+//            )
+//        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            val tabModifier = Modifier
+                .height(TextFieldDefaults.MinHeight)
 
-                task.description?.let { str ->
-                    Text(
-                        text = str,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.bodySmall
-                    )
+            TabRow(
+                selectedTabIndex = 0,
+                containerColor = darkPrimaryColor,
+                contentColor = darkSecondaryColor,
+            ) {
+                Tab(
+                    modifier = tabModifier,
+                    selected = false,
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text(text = "All")
+                }
+
+                Tab(
+                    modifier = tabModifier,
+                    selected = false,
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text(text = "Completed")
                 }
             }
+
+            view(innerPadding)
         }
     }
 }

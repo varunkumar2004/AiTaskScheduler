@@ -8,6 +8,8 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.taskscheduler.data.Task
+import kotlinx.serialization.Serializable
 
 sealed class Routes(
     val route: String,
@@ -20,3 +22,9 @@ sealed class Routes(
     data object Bookmarks : Routes(route = "Saved", icon = Icons.Default.Bookmarks)
     data object Folders : Routes(route = "Folders", icon = Icons.Default.FolderSpecial)
 }
+
+
+@Serializable
+data class TaskScreen(
+    val task: Task
+)

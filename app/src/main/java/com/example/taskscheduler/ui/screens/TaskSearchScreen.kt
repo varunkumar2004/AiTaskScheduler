@@ -4,21 +4,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ChipColors
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -31,9 +24,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.taskscheduler.data.Task
 import com.example.taskscheduler.ui.components.TaskListItem
-import com.example.taskscheduler.ui.components.TaskScreenView
-import com.example.taskscheduler.ui.theme.primaryColor
-import com.example.taskscheduler.ui.theme.secondaryColor
+import com.example.taskscheduler.ui.components.TaskView
+//import com.example.taskscheduler.ui.theme.primaryColor
+//import com.example.taskscheduler.ui.theme.secondaryColor
 import com.example.taskscheduler.ui.viewmodels.SearchState
 import com.example.taskscheduler.ui.viewmodels.SearchViewModel
 import com.example.taskscheduler.utils.Routes
@@ -56,9 +49,9 @@ fun TaskSearchScreen(
 
 
 
-    TaskScreenView(
+    TaskView(
         modifier = modifier,
-        selectedNavItem = Routes.Search,
+//        selectedNavItem = Routes.Search,
         view = { pd ->
             Column(
                 modifier = modifier
@@ -129,10 +122,10 @@ private fun SearchTextField(
     val colors = TextFieldDefaults.colors(
         focusedContainerColor = Color.Transparent,
         unfocusedContainerColor = Color.Transparent,
-        focusedIndicatorColor = primaryColor,
-        unfocusedIndicatorColor = primaryColor,
-        disabledIndicatorColor = primaryColor,
-        cursorColor = primaryColor
+//        focusedIndicatorColor = primaryColor,
+//        unfocusedIndicatorColor = primaryColor,
+//        disabledIndicatorColor = primaryColor,
+//        cursorColor = primaryColor
     )
 
     OutlinedTextField(
@@ -153,11 +146,11 @@ private fun SearchFilterChips(
     categories: List<String>
 ) {
     val colors = FilterChipDefaults.filterChipColors(
-        selectedContainerColor = primaryColor,
-        containerColor = primaryColor,
-        labelColor = secondaryColor,
-        disabledLabelColor = secondaryColor,
-        selectedLabelColor = secondaryColor
+//        selectedContainerColor = primaryColor,
+//        containerColor = primaryColor,
+//        labelColor = secondaryColor,
+//        disabledLabelColor = secondaryColor,
+//        selectedLabelColor = secondaryColor
     )
 
     LazyRow(
